@@ -15,6 +15,52 @@ CREATE TABLE cars (
   features TEXT
 );
 
+-- User table
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR (255) UNIQUE NOT NULL,
+  email VARCHAR (255) UNIQUE NOT NULL,
+  is_active BOOLEAN NOT NULL DEFAULT TRUE
+);
+
+-- Search Parameters table
+CREATE TABLE search_parameters (
+  id SERIAL PRIMARY KEY,
+  user_id INT REFERENCES users(id),
+  brand VARCHAR (255),
+  model VARCHAR (255),
+  -- Include other parameters as needed
+);
+
+-- Offers table
+CREATE TABLE offers (
+  id SERIAL PRIMARY KEY,
+  car_id INT REFERENCES cars(id),
+  user_id INT REFERENCES users(id),
+  price NUMERIC,
+  offer_link TEXT
+);
+
+-- Users test data
+INSERT INTO users (username, email, is_active) VALUES
+('john_doe', 'john.doe@example.com', TRUE),
+('jane_smith', 'jane.smith@example.com', TRUE),
+('alex_brown', 'alex.brown@example.com', FALSE);
+
+
+-- Search Parameters test data
+INSERT INTO search_parameters (user_id, brand, model) VALUES
+(1, 'Volkswagen', 'Golf'),
+(1, 'Toyota', 'Camry'),
+(2, 'Ford', 'Mustang');
+
+-- Offers test data
+INSERT INTO offers (car_id, user_id, price, offer_link) VALUES
+(1, 1, 19500.00, 'http://example.com/offers/1'),
+(2, 1, 24500.00, 'http://example.com/offers/2'),
+(15, 2, 18500.00, 'http://example.com/offers/3');
+
+
 -- Testdata
 INSERT INTO cars (brand, model, mileage, year_of_manufacture, country, region, price, engine, features) VALUES
   ('Volkswagen', 'Golf', 50000, 2019, 'Germany', 'North', 20000.00, '1.4L Turbo', 'Air Conditioning, Power Windows, Navigation'),
