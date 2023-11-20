@@ -28,7 +28,7 @@ CREATE TABLE search_parameters (
   id SERIAL PRIMARY KEY,
   user_id INT REFERENCES users(id),
   brand VARCHAR (255),
-  model VARCHAR (255),
+  model VARCHAR (255)
   -- Include other parameters as needed
 );
 
@@ -53,12 +53,6 @@ INSERT INTO search_parameters (user_id, brand, model) VALUES
 (1, 'Volkswagen', 'Golf'),
 (1, 'Toyota', 'Camry'),
 (2, 'Ford', 'Mustang');
-
--- Offers test data
-INSERT INTO offers (car_id, user_id, price, offer_link) VALUES
-(1, 1, 19500.00, 'http://example.com/offers/1'),
-(2, 1, 24500.00, 'http://example.com/offers/2'),
-(15, 2, 18500.00, 'http://example.com/offers/3');
 
 
 -- Testdata
@@ -85,3 +79,10 @@ INSERT INTO cars (brand, model, mileage, year_of_manufacture, country, region, p
   ('Tesla', 'Model 3', 15000, 2023, 'USA', 'California', 50000.00, 'Electric', 'Autopilot, Full Self-Driving, Premium Interior'),
   ('Porsche', '911', 25000, 2022, 'Germany', 'Baden-Württemberg', 90000.00, '3.0L Twin-Turbo Flat-6', 'PDK Transmission, Sport Chrono Package, PASM'),
   ('Ferrari', '488 GTB', 10000, 2022, 'Italy', 'Maranello', 250000.00, '3.9L Twin-Turbo V8', 'Carbon Fiber Interior, Scuderia Shields, Racing Seats');
+
+
+-- Offers test data
+INSERT INTO offers (car_id, user_id, price, offer_link) VALUES
+(1, 1, 19500.00, 'http://example.com/offers/1'),
+(2, 1, 24500.00, 'http://example.com/offers/2'),
+(15, 2, 18500.00, 'http://example.com/offers/3');
