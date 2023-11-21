@@ -14,7 +14,9 @@ cursor = conn.cursor()
 
 try:
     # Example: Execute a simple query
+    #cursor.execute("Delete FROM cars where id > 25")
     cursor.execute("SELECT * FROM cars")
+    
     rows = cursor.fetchall()
 
     # Print the fetched data
