@@ -1,0 +1,7 @@
+Car Offer Details:
+Brand: {brand}
+Model: {model}
+Mileage: {mileage}
+Year: {year_of_manufacture}
+Price: {price}
+Features: {features}
