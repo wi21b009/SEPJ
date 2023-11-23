@@ -12,16 +12,16 @@ password = "YOURPASSWORD"  # The password for your own email address
 message = MIMEMultipart()
 message["From"] = sender_email
 message["To"] = receiver_email
-message["Subject"] = "Test Email from Python"  # Change the subject of the email
+message["Subject"] = "Email funktioniert, prinzipiell"  # Change the subject of the email
 
 # Add body to the email
-body = "This is the body of the email sent through Python" # Change the body of the email
+body = "test test Tes Test Test" # Change the body of the email
 message.attach(MIMEText(body, "plain"))
 
 # Add the image file to be attached
-with open('Testpicture.jpg', 'rb') as image_file:
+with open(r'C:\Users\Lukas\OneDrive\FH\5_Semester_WS2023\SEPJ\SEPJ\MailService\Testpicture.jpg', 'rb') as image_file: # Change the path to the image file, currently it is the path to the image file on my computer
     image = MIMEImage(image_file.read())
-    message.attach(image)  # Attach the image after attaching the text
+    message.attach(image) # Attach the image after attaching the text
 
 
 # Fetch data from the database and format the email body
