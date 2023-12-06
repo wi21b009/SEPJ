@@ -2,11 +2,12 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.image import MIMEImage
+import config
 
 # Email configuration
-sender_email = "wi21b0..@technikum-wien.at"  # Change with your own email address from university
-receiver_email = "wi21b0..@technikum-wien.at"  # Change to the email address you want to send the email to
-password = "YOURPASSWORD"  # The password for your own email address
+sender_email = config.sender_email # Email address from the config.py file
+receiver_email = "wi21b029@technikum-wien.at"  # Change to the email address you want to send the email to
+password = config.password # The password for your own email address from the config.py file
 
 # Create a multipart message
 message = MIMEMultipart()

@@ -1,0 +1,4 @@
+# .gitignore
+
+# Ignore config.py for sensitive information
+config.py
