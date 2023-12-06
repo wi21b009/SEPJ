@@ -101,7 +101,7 @@ def get_willhaben_query(url):
 
         #               CAR DATA
         # Find the <ul> element with the specific class
-        target_div = soup.find('ul', class_='PropertyList-sc-e2zq14-0 dptFLl')
+        target_div = soup.find('ul', class_='sc-72e3a87a-0 fpmBa-d')
 
         # Extract all the text from the found <div> element
         if target_div:
@@ -172,34 +172,33 @@ def get_willhaben_query(url):
         print("Error:", str(e))
 
 
+# Function to querry the willhaben website
+def querry_willhaben(url):
+    # Create an empty list to store car URLs
+    carsUrl = []
 
-        
+    # Open the main Willhaben query URL
+    fp = urllib.request.urlopen(url)
+    mybytes = fp.read()
+    mystr = mybytes.decode("utf8")
+    fp.close()
 
-# Create an empty list to store car URLs
-carsUrl = []
+    # Create a BeautifulSoup object to parse the main page
+    soup = BeautifulSoup(mystr, 'html.parser')
 
-# Open the main Willhaben query URL
-fp = urllib.request.urlopen("https://www.willhaben.at/iad/gebrauchtwagen/auto/gebrauchtwagenboerse?sfId=aaa81249-4bc8-4ac5-97f3-a5bd21b1229c&isNavigation=true&CAR_MODEL/MAKE=1005&CAR_MODEL/MODEL=1042&MILEAGE_TO=10000&YEAR_MODEL_FROM=2023&PRICE_TO=45000")
-mybytes = fp.read()
-mystr = mybytes.decode("utf8")
-fp.close()
+    # Find all <a> elements with an 'id' attribute that starts with 'search-result-entry'
+    entry_links = soup.find_all('a', id=re.compile(r'^search-result-entry'))
 
-# Create a BeautifulSoup object to parse the main page
-soup = BeautifulSoup(mystr, 'html.parser')
+    # Loop through the entry links
+    for link in entry_links:
+        url = link.get('href')
+        if url:
+            print("Found URL:", url)
+            carsUrl.append("https://www.willhaben.at" + url)
 
-# Find all <a> elements with an 'id' attribute that starts with 'search-result-entry'
-entry_links = soup.find_all('a', id=re.compile(r'^search-result-entry'))
-
-# Loop through the entry links
-for link in entry_links:
-    url = link.get('href')
-    if url:
-        print("Found URL:", url)
-        carsUrl.append("https://www.willhaben.at" + url)
-
-# Loop through the list of car URLs and scrape data for each car
-for car in carsUrl:
-    print("Scraping URL:", car)
-    car_instance = get_willhaben_query(car)
-    upload_data(car_instance)
+    # Loop through the list of car URLs and scrape data for each car
+    for car in carsUrl:
+        print("Scraping URL:", car)
+        car_instance = get_willhaben_query(car)
+        upload_data(car_instance)
 

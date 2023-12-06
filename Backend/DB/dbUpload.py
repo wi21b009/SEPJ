@@ -45,22 +45,3 @@ def upload_data(car):
             # Close the cursor and connection
             cursor.close()
             close_connection(conn)
-
-# Example usage:
-# Create a Car object
-car_data = {
-    "brand": "Toyota",
-    "model": "Corolla",
-    "mileage": 30000,
-    "year_of_manufacture": 2021,
-    "country": "Japan",
-    "region": "Tokyo",
-    "price": 21000.00,
-    "engine": "1.8L 4-Cylinder",
-    "features": "Lane Departure Warning, Toyota Safety Sense, Bluetooth"
-}
-
-car_instance = Car(**car_data)
-
-# Call the upload_data function with the Car object
-upload_data(car_instance)

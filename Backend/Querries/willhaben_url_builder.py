@@ -1,9 +1,11 @@
 import sys
-import pandas as pd  # Assuming you have pandas installed
+import pandas as pd
 
 # Import the dbConnect module
 sys.path.append("c:\\Users\\Tobias\\OneDrive - FH Technikum Wien\\Dokumente\\FH\\5. Semester\\SEPJ\\SEPJ\\Backend\\DB")
 from dbConnect import create_connection, close_connection
+
+# ------------ FUNCTIONS ------------
 
 # Function to fetch search parameters from the database
 def fetch_search_parameters(user_id):
@@ -12,7 +14,7 @@ def fetch_search_parameters(user_id):
     if conn:
         cursor = conn.cursor()
 
-        # Assuming you want to fetch the latest active search parameters for a specific user
+        # Fetch the latest active search parameters for a specific user
         cursor.execute("""
             SELECT * FROM search_parameters
             WHERE user_id = %s AND is_active = TRUE
@@ -30,6 +32,38 @@ def fetch_search_parameters(user_id):
     else:
         return None
 
+
+# Function to translate brand and model text to codes using an Excel file (Brands.xlsx)
+def translate_brand_model(search_params_dict, brand_translation, model_translation):
+    brand_name = search_params_dict['CAR_MODEL/MAKE']
+    model_name = search_params_dict['CAR_MODEL/MODEL']
+
+    print(f"Translating brand: {brand_name}, model: {model_name}")
+
+    # Check if the brand_name and model_name are present in the DataFrame
+    brand_matches = brand_translation[brand_translation['Marke'] == brand_name]
+    
+    # Adjust the column name here to match the actual case in your Excel file
+    model_matches = model_translation[model_translation['Model'] == model_name]
+
+    print("Brand matches:", brand_matches)
+    print("Model matches:", model_matches)
+
+    if not brand_matches.empty and not model_matches.empty:
+        brand_code = brand_matches['ID'].iloc[0]
+        
+        # Adjust the column name here to match the actual case in your Excel file
+        model_code = model_matches['ID'].iloc[0]
+
+        search_params_dict['CAR_MODEL/MAKE'] = brand_code
+        search_params_dict['CAR_MODEL/MODEL'] = model_code
+
+        print(f"Translation successful. Brand code: {brand_code}, Model code: {model_code}")
+
+    else:
+        print("Translation failed. No matches found.")
+
+
 # Function to build the URL using dynamic search parameters
 def build_url_from_database(base_url, user_id):
     # Fetch search parameters from the database
@@ -46,12 +80,9 @@ def build_url_from_database(base_url, user_id):
         }
 
         # Translate brand and model text to codes using an Excel file (Brands.xlsx)
-        brand_model_translation = pd.read_excel("c:\\Users\\Tobias\\OneDrive - FH Technikum Wien\\Dokumente\\FH\\5. Semester\\SEPJ\\SEPJ\\Backend\\Brands.xlsx")
-        brand_code = brand_model_translation.loc[brand_model_translation['Brand'] == search_params_dict['CAR_MODEL/MAKE'], 'Code'].iloc[0]
-        model_code = brand_model_translation.loc[brand_model_translation['Model'] == search_params_dict['CAR_MODEL/MODEL'], 'Code'].iloc[0]
-
-        search_params_dict['CAR_MODEL/MAKE'] = brand_code
-        search_params_dict['CAR_MODEL/MODEL'] = model_code
+        brand_translation = pd.read_excel("C:\\Users\\Tobias\\OneDrive - FH Technikum Wien\\Dokumente\\FH\\5. Semester\\SEPJ\\SEPJ\\Backend\\Querries\\Brands.xlsx", sheet_name="Brands")
+        model_translation = pd.read_excel("C:\\Users\\Tobias\\OneDrive - FH Technikum Wien\\Dokumente\\FH\\5. Semester\\SEPJ\\SEPJ\\Backend\\Querries\\Brands.xlsx", sheet_name="Model")
+        translate_brand_model(search_params_dict, brand_translation, model_translation)
 
         # Build and return the complete URL
         return build_url(base_url, search_params_dict)
@@ -59,28 +90,25 @@ def build_url_from_database(base_url, user_id):
     else:
         print("No active search parameters found for the user.")
         return None
-    
+
+
 # Function to build the URL using dynamic search parameters
 def build_url(base_url, search_params):
-    #create a list of strings with the search parameters
+    # Create a list of strings with the search parameters
     search_params_list = [f"{k}={v}" for k, v in search_params.items()]
 
-    #join the list of strings with the base url
+    # Join the list of strings with the base url
     search_params_string = "&".join(search_params_list)
 
-    #return the complete url
+    # Return the complete URL
     return f"{base_url}&rows=30&page=1&{search_params_string}"
 
-# Example usage
-user_id = 1  # Replace with the actual user ID
-#base url, where the search is performed
-base_url = "https://www.willhaben.at/iad/gebrauchtwagen/auto/gebrauchtwagenboerse?sfId=cab39f81-0a0c-4e5d-84b8-b19aad22a2ed&isNavigation=true"
 
-# Build the dynamic URL
-dynamic_url = build_url_from_database(base_url, user_id)
+# Function to get the dynamic URL for a given user ID
+def get_dynamic_url(user_id):
+    # Example usage
+    # Base URL, where the search is performed
+    base_url = "https://www.willhaben.at/iad/gebrauchtwagen/auto/gebrauchtwagenboerse?sfId=cab39f81-0a0c-4e5d-84b8-b19aad22a2ed&isNavigation=true"
 
-if dynamic_url:
-    print("Dynamic URL:", dynamic_url)
-    # Now you can use this dynamic URL for your scraping logic
-    # For example: car_instance = get_willhaben_query(dynamic_url)
-    # upload_data(car_instance)
+    # Build the dynamic URL
+    return build_url_from_database(base_url, user_id)
