@@ -2,7 +2,8 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.image import MIMEImage
-import config
+import psycopg2  # Import the psycopg2 library for PostgreSQL database access
+import config  # Import the config.py file to access the email address and password
 
 # Email configuration
 sender_email = config.sender_email # Email address from the config.py file
@@ -13,10 +14,30 @@ password = config.password # The password for your own email address from the co
 message = MIMEMultipart()
 message["From"] = sender_email
 message["To"] = receiver_email
-message["Subject"] = "Email funktioniert, prinzipiell"  # Change the subject of the email
+message["Subject"] = "Database Data" # Change the subject of the email
+
+
+
+# Connect to the PostgreSQL database
+conn = psycopg2.connect(
+    host="localhost",
+    database="cardatabase",
+    user="caruser",
+    port="30004",
+    password="carpassword"
+)
+
+# Retrieve data from the database (modify the SQL query as needed)
+cursor = conn.cursor()
+cursor.execute("SELECT * FROM cars")
+data = cursor.fetchall()
+
+# Close the database connection
+conn.close()
+
 
 # Add body to the email
-body = "test test Tes Test Test" # Change the body of the email
+body = "\n".join([str(row) for row in data])  # Convert data to string and join with newlines
 message.attach(MIMEText(body, "plain"))
 
 # Add the image file to be attached
