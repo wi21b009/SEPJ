@@ -1,5 +1,8 @@
 -- drop table cars if already exists
+DROP TABLE IF EXISTS offers;
+DROP TABLE IF EXISTS search_parameters;
 DROP TABLE IF EXISTS cars;
+DROP TABLE IF EXISTS users;
 
 -- create tabel cars
 CREATE TABLE cars (
@@ -19,7 +22,7 @@ CREATE TABLE cars (
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   username VARCHAR (255) UNIQUE NOT NULL,
-  email VARCHAR (255) UNIQUE NOT NULL,
+  email VARCHAR (255) NOT NULL, --unique email removed for testing purposes
   password VARCHAR (255) NOT NULL,
   is_active BOOLEAN NOT NULL DEFAULT TRUE
 );
@@ -55,16 +58,47 @@ SELECT * FROM pg_extension; --check if pgcrypto is installed
 
 -- Users test data
 INSERT INTO users (username, email, password, is_active) VALUES
-('john_doe', 'john.doe@example.com', crypt('12345', gen_salt('bf')), TRUE), --#gen_salt('bf') is used to generate a random salt (for hasing the password)
-('jane_smith', 'jane.smith@example.com', crypt('54321', gen_salt('bf')), TRUE),
-('alex_brown', 'alex.brown@example.com', crypt('09876', gen_salt('bf')), FALSE);
+('user1', 'wi21b029@technikum-wien.at', crypt('password1', gen_salt('bf')), TRUE), --#gen_salt('bf') is used to generate a random salt (for hasing the password)
+('user2', 'wi21b009@technikum-wien.at', crypt('password2', gen_salt('bf')), TRUE),
+('user3', 'wi21b029@technikum-wien.at', crypt('password3', gen_salt('bf')), TRUE),
+('user4', 'wi21b009@technikum-wien.at', crypt('password4', gen_salt('bf')), TRUE),
+('user5', 'wi21b029@technikum-wien.at', crypt('password5', gen_salt('bf')), TRUE),
+('user6', 'wi21b009@technikum-wien.at', crypt('password6', gen_salt('bf')), TRUE),
+('user7', 'wi21b029@technikum-wien.at', crypt('password7', gen_salt('bf')), TRUE),
+('user8', 'wi21b009@technikum-wien.at', crypt('password8', gen_salt('bf')), TRUE),
+('user9', 'wi21b029@technikum-wien.at', crypt('password9', gen_salt('bf')), TRUE),
+('user10', 'wi21b009@technikum-wien.at', crypt('password10', gen_salt('bf')), TRUE);
+
 
 
 -- Search Parameters test data
 INSERT INTO search_parameters (user_id, brand, model, mileage, year_of_manufacture, country, region, price, engine, is_active) VALUES
 (1, 'Volkswagen', 'Golf', 50000, 2018, 'Österreich', 'Wien', 15000, 'Diesel', TRUE),
 (1, 'Toyota', 'Camry', 20000, 2020, 'Österreich', 'St. Pölten', 20000, 'Diesel', FALSE),
-(2, 'Ford', 'Mustang', 50000, 1990, 'Österreich', 'Graz', 30000, 'Benzin', TRUE);
+(2, 'Ford', 'Mustang', 50000, 1990, 'Österreich', 'Graz', 30000, 'Benzin', TRUE),
+(1, 'Volkswagen', 'Golf', 50000, 2018, 'Österreich', 'Wien', 15000, 'Diesel', TRUE),
+(1, 'Toyota', 'Camry', 20000, 2020, 'Österreich', 'St. Pölten', 20000, 'Diesel', FALSE),
+(1, 'Ford', 'Mustang', 50000, 1990, 'Österreich', 'Graz', 30000, 'Benzin', TRUE),
+(2, 'Audi', 'A4', 30000, 2021, 'Österreich', 'Wien', 25000, 'Benzin', TRUE),
+(2, 'BMW', '3 Series', 40000, 2020, 'Österreich', 'Salzburg', 35000, 'Diesel', FALSE),
+(3, 'Toyota', 'Corolla', 25000, 2019, 'Österreich', 'Linz', 18000, 'Benzin', TRUE),
+(3, 'Ford', 'Mustang', 45000, 2019, 'Österreich', 'Salzburg', 30000, 'Benzin', TRUE),
+(3, 'Volkswagen', 'Passat', 35000, 2018, 'Österreich', 'Graz', 22000, 'Diesel', FALSE),
+(3, 'Audi', 'A4', 30000, 2021, 'Österreich', 'Wien', 25000, 'Benzin', TRUE),
+(4, 'BMW', '3 Series', 40000, 2020, 'Österreich', 'Salzburg', 35000, 'Diesel', FALSE),
+(4, 'Toyota', 'Corolla', 25000, 2019, 'Österreich', 'Linz', 18000, 'Benzin', TRUE),
+(5, 'Volkswagen', 'Passat', 35000, 2018, 'Österreich', 'Graz', 22000, 'Diesel', FALSE),
+(5, 'Audi', 'A4', 30000, 2021, 'Österreich', 'Wien', 25000, 'Benzin', TRUE),
+(6, 'Ford', 'Mustang', 45000, 2019, 'Österreich', 'Salzburg', 30000, 'Benzin', TRUE),
+(6, 'BMW', '3 Series', 40000, 2020, 'Österreich', 'Salzburg', 35000, 'Diesel', FALSE),
+(7, 'Toyota', 'Corolla', 25000, 2019, 'Österreich', 'Linz', 18000, 'Benzin', TRUE),
+(7, 'Ford', 'Mustang', 45000, 2019, 'Österreich', 'Salzburg', 30000, 'Benzin', TRUE),
+(8, 'Volkswagen', 'Passat', 35000, 2018, 'Österreich', 'Graz', 22000, 'Diesel', FALSE),
+(8, 'Audi', 'A4', 30000, 2021, 'Österreich', 'Wien', 25000, 'Benzin', TRUE),
+(9, 'Toyota', 'Corolla', 25000, 2019, 'Österreich', 'Linz', 18000, 'Benzin', TRUE),
+(9, 'Ford', 'Mustang', 45000, 2019, 'Österreich', 'Salzburg', 30000, 'Benzin', TRUE),
+(10, 'Volkswagen', 'Passat', 35000, 2018, 'Österreich', 'Graz', 22000, 'Diesel', FALSE),
+(10, 'Audi', 'A4', 30000, 2021, 'Österreich', 'Wien', 25000, 'Benzin', TRUE);
 
 
 -- Testdata

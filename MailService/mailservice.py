@@ -1,68 +1,78 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from email.mime.image import MIMEImage
-import psycopg2  # Import the psycopg2 library for PostgreSQL database access
-import config  # Import the config.py file to access the email address and password
+import psycopg2
+import config
 
-# Email configuration
-sender_email = config.sender_email # Email address from the config.py file
-receiver_email = "wi21b029@technikum-wien.at"  # Change to the email address you want to send the email to
-password = config.password # The password for your own email address from the config.py file
+def send_mail(user_id):
+    # Email configuration
+    sender_email = config.sender_email
+    password = config.password
 
-# Create a multipart message
-message = MIMEMultipart()
-message["From"] = sender_email
-message["To"] = receiver_email
-message["Subject"] = "Database Data" # Change the subject of the email
+    # Database connection
+    conn = psycopg2.connect(
+        host="localhost",
+        database="cardatabase",
+        user="caruser",
+        port="30004",
+        password="carpassword"
+    )
 
+    # Select the email address of the user
+    if conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT email FROM users WHERE id = %s", (user_id,))
+        receiver_email = cursor.fetchone()[0]
 
+        # Select the search parameters of the user
+        cursor.execute("SELECT * FROM search_parameters WHERE user_id = %s", (user_id,))
+        search_parameters = cursor.fetchall()
 
-# Connect to the PostgreSQL database
-conn = psycopg2.connect(
-    host="localhost",
-    database="cardatabase",
-    user="caruser",
-    port="30004",
-    password="carpassword"
-)
+        # Select the cars and offers based on the search parameters
+        cursor.execute("""
+            SELECT c.*, o.offer_link FROM cars c
+            JOIN offers o ON c.id = o.car_id
+            WHERE o.user_id = %s
+        """, (user_id,))
+        car_offers = cursor.fetchall()
+        cursor.close()
 
-# Retrieve data from the database (modify the SQL query as needed)
-cursor = conn.cursor()
-cursor.execute("SELECT * FROM cars")
-data = cursor.fetchall()
+    # Close the database connection
+    conn.close()
 
-# Close the database connection
-conn.close()
+    # Create the email message
+    message = MIMEMultipart()
+    message["From"] = sender_email
+    message["To"] = receiver_email
+    message["Subject"] = "Your crawled offers"
 
+    # Erstellen des HTML-Bodies für die E-Mail
+    html = "<html><body>"
+    html += f"<h2>Suchparameter für Benutzer ID: {user_id}</h2>"
+    html += "<table border='1'><tr><th>ID</th><th>Marke</th><th>Modell</th><th>Kilometerstand</th><th>Baujahr</th><th>Land</th><th>Region</th><th>Preis</th><th>Motor</th><th>Merkmale</th><th>Aktiv</th></tr>"
 
-# Add body to the email
-body = "\n".join([str(row) for row in data])  # Convert data to string and join with newlines
-message.attach(MIMEText(body, "plain"))
+    for row in search_parameters:
+        html += "<tr>" + "".join([f"<td>{str(item)}</td>" for item in row]) + "</tr>"
+    html += "</table>"
 
-# Add the image file to be attached
-with open(r'C:\Users\Lukas\OneDrive\FH\5_Semester_WS2023\SEPJ\SEPJ\MailService\Testpicture.jpg', 'rb') as image_file: # Change the path to the image file, currently it is the path to the image file on my computer
-    image = MIMEImage(image_file.read())
-    message.attach(image) # Attach the image after attaching the text
+    html += "<h2>Passende Autos und Angebote</h2>"
+    html += "<table border='1'><tr><th>ID</th><th>Marke</th><th>Modell</th><th>Kilometerstand</th><th>Baujahr</th><th>Land</th><th>Region</th><th>Preis</th><th>Motor</th><th>Merkmale</th><th>Angebotslink</th></tr>"
 
+    for row in car_offers:
+        html += "<tr>" + "".join([f"<td>{str(item)}</td>" for item in row[:-1]]) + f"<td><a href='{row[-1]}'>{row[-1]}</a></td></tr>"
+    html += "</table></body></html>"
 
-# Fetch data from the database and format the email body
-#email_body = email_template.format(
-    #brand=car_data['brand'],
-    #model=car_data['model'],
-    #mileage=car_data['mileage'],
-    #year_of_manufacture=car_data['year_of_manufacture'],
-    #price=car_data['price'],
-    #features=car_data['features']
-#)
+    message.attach(MIMEText(html, "html"))
 
-# SMTP server configuration
-smtp_server = "smtp.technikum-wien.at"
-smtp_port = 587  
+    # SMTP-Serverconfiguration
+    smtp_server = "smtp.technikum-wien.at"
+    smtp_port = 587
 
-# Create a secure connection with the SMTP server
-with smtplib.SMTP(smtp_server, smtp_port) as server:
-    server.starttls()  # Start TLS encryption
-    server.login(sender_email, password)  # Log in to the SMTP server
-    server.send_message(message)  # Send the email
-    print("Email sent successfully!")
+    # connect to SMTP server and send email
+    with smtplib.SMTP(smtp_server, smtp_port) as server:
+        server.starttls()  # activate TLS encryption
+        server.login(sender_email, password)  # login with email and password
+        server.send_message(message)  # send the email
+        print("Email sent successfully")
+
+send_mail(1)  # testing with user_id = 1
