@@ -1,0 +1,21 @@
+small {
+  color: #e74c3c;
+}
+
+p.loginError {
+  color: red;
+  display: none;
+}
+
+body {
+  display: none;
+}
+
+#customerOrdersTableDiv {
+  display: none;
+}
+
+input,
+label {
+  display: block;
+}
