@@ -15,8 +15,9 @@ cursor = conn.cursor()
 try:
     # Example: Execute a simple query
     #cursor.execute("Delete FROM cars where id > 25")
-    cursor.execute("SELECT * FROM cars")
-    #cursor.execute("SELECT * FROM search_parameters ORDER BY id ASC")
+    #cursor.execute("SELECT * FROM cars")
+    cursor.execute("SELECT * FROM search_parameters ORDER BY id ASC")
+    #cursor.execute("SELECT * FROM users")
     
     rows = cursor.fetchall()
 
