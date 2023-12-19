@@ -161,7 +161,8 @@ def get_willhaben_query(url):
             region=region,
             price=price,
             engine=engine,
-            features=features
+            features=features,
+            offer_link=url
         )
 
         return car_instance
@@ -196,9 +197,19 @@ def querry_willhaben(url):
             print("Found URL:", url)
             carsUrl.append("https://www.willhaben.at" + url)
 
+    # counter to count the number of results
+    counter = 0
+
     # Loop through the list of car URLs and scrape data for each car
     for car in carsUrl:
         print("Scraping URL:", car)
         car_instance = get_willhaben_query(car)
         upload_data(car_instance)
+        counter += 1
+
+    # Print the number of results
+    print("Number of results:", counter)
+
+    # Return the list of car instances
+    return counter
 

@@ -8,7 +8,7 @@ from dbConnect import create_connection, close_connection
 # ------------ FUNCTIONS ------------
 
 # Function to fetch search parameters from the database
-def fetch_search_parameters(user_id):
+def fetch_search_parameters(id):
     conn = create_connection()
 
     if conn:
@@ -17,10 +17,10 @@ def fetch_search_parameters(user_id):
         # Fetch the latest active search parameters for a specific user
         cursor.execute("""
             SELECT * FROM search_parameters
-            WHERE user_id = %s AND is_active = TRUE
+            WHERE id = %s AND is_active = TRUE
             ORDER BY id DESC
             LIMIT 1;
-        """, (user_id,))
+        """, (id,))
 
         search_params = cursor.fetchone()
 
@@ -65,9 +65,9 @@ def translate_brand_model(search_params_dict, brand_translation, model_translati
 
 
 # Function to build the URL using dynamic search parameters
-def build_url_from_database(base_url, user_id):
+def build_url_from_database(base_url, id):
     # Fetch search parameters from the database
-    search_params = fetch_search_parameters(user_id)
+    search_params = fetch_search_parameters(id)
 
     if search_params:
         # Convert the fetched search parameters into a dictionary
@@ -105,10 +105,10 @@ def build_url(base_url, search_params):
 
 
 # Function to get the dynamic URL for a given user ID
-def get_dynamic_url(user_id):
+def get_dynamic_url(id):
     # Example usage
     # Base URL, where the search is performed
     base_url = "https://www.willhaben.at/iad/gebrauchtwagen/auto/gebrauchtwagenboerse?sfId=cab39f81-0a0c-4e5d-84b8-b19aad22a2ed&isNavigation=true"
 
     # Build the dynamic URL
-    return build_url_from_database(base_url, user_id)
+    return build_url_from_database(base_url, id)
