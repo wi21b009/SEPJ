@@ -15,6 +15,7 @@ CREATE TABLE cars (
   region VARCHAR (255),
   price INT,
   engine VARCHAR (255),
+  offer_link TEXT,
   features TEXT
 );
 
