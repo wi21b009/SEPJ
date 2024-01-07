@@ -155,7 +155,7 @@ class BusinessLogic
 
     private function processRegister($data)
     {
-        print_r($data);
+        //print_r($data);
 
         // check json data
         if (!isset($data->username) || !isset($data->password) || !isset($data->email)) {
@@ -165,7 +165,7 @@ class BusinessLogic
         //hashpassword
         $data->password = password_hash($data->password, PASSWORD_DEFAULT);
 
-        $user = new User($data->username, $data->password, $data->email, $data->is_active);
+        $user = new User($data->username, $data->password, $data->email);
 
         if (($result = $this->dh->createUser($user)) === false) {
             $this->error(400, [], "Bad Request - error saving user");

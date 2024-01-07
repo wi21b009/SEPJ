@@ -73,7 +73,7 @@ $(document).ready(function () {
       .map((element) => element.value);
 
     if (regions.length === 0) {
-      alert("Mindestens ein Bezirk muss ausgewählt werden");
+      alert("Mindestens eine Region muss ausgewählt werden");
       return;
     }
 

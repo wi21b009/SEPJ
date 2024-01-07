@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(0);
 class Datahandler
 {
 
@@ -15,7 +15,7 @@ class Datahandler
             printf("Connect failed\n");
             exit();
         }
-        echo("Connected successfully\n");
+        // echo("Connected successfully\n");
         return $conn;
     }
 
@@ -29,7 +29,7 @@ class Datahandler
 
     function getUser($loginData)
     {
-        // $user = array();
+        $user = array();
         // connect to postgres:
         $db_obj = $this->getDb();
 
