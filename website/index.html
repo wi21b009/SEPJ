@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Crawl</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link href="res/css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="container">
+      <header id="mainNavigation"></header>
+      <h3 id="welcome-txt"></h3>
+
+      <div id="searchAgent-list" class="col-md-12 invisible">
+        <div class="p-3 py-5">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2>Suchagentenübersicht</h2>
+            <a class="btn btn-primary" href="./searchAgent.html"
+              >Neuen Suchagent erstellen</a
+            >
+          </div>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <!--<th scope="col">ID</th>-->
+                <th scope="col" id="brand">Marke</th>
+                <th scope="col">Modell</th>
+                <th scope="col">Preis bis (€)</th>
+                <th scope="col" colspan="2">Baujahr</th>
+                <th scope="col">Kilometerstand</th>
+                <th scope="col">Land</th>
+                <th scope="col">Region</th>
+                <th scope="col">Motor</th>
+                <th scope="col">Extras</th>
+              </tr>
+            </thead>
+            <tbody id="searchAgentsTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/regions.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

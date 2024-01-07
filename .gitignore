@@ -1,0 +1,13 @@
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# IntelliJ
+.idea/
+*.iml
+*.iws
+out/
+target/
+
+# MACOS
+.DS_Store
