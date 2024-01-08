@@ -15,154 +15,20 @@
   </head>
 
   <body>
-    <div class="container">
+    <div class="container mb-5">
       <header id="mainNavigation"></header>
       <h1 class="mb-4" id="pageTitle">Suchagent erstellen</h1>
       <div class="form-floating mb-3">
         <select id="brandSelect" name="brandSelect" class="form-select">
           <option value="" selected disabled hidden></option>
-          <!-- <option value="1000">Alfa Romeo</option>
-          <option value="1001">AMC</option>
-          <option value="1002">Aston Martin</option>
-          <option value="1003">Audi</option>
-          <option value="1004">Bentley</option>
-          <option value="1005">BMW</option>
-          <option value="1006">Buick</option>
-          <option value="1007">Cadillac</option>
-          <option value="1008">Chevrolet</option>
-          <option value="1009">Chrysler</option>
-          <option value="1010">Citroen</option>
-          <option value="1011">Dacia</option>
-          <option value="1012">Daewoo</option>
-          <option value="1013">Daihatsu</option>
-          <option value="1014">Dodge</option>
-          <option value="1015">Ferrari</option>
-          <option value="1016">Fiat</option>
-          <option value="1017">Ford</option>
-          <option value="1018">Honda</option>
-          <option value="1019">Hummer</option>
-          <option value="1020">Hyundai</option>
-          <option value="1021">Isuzu</option>
-          <option value="1022">IVECO</option>
-          <option value="1023">Jaguar</option>
-          <option value="1024">Jeep</option>
-          <option value="1025">KIA</option>
-          <option value="1026">Lada</option>
-          <option value="1027">Lamborgini</option>
-          <option value="1028">Lancia</option>
-          <option value="1029">Land Rover</option>
-          <option value="1030">Lexus</option>
-          <option value="1031">Lincoln</option>
-          <option value="1032">Lotus</option>
-          <option value="1033">Maserati</option>
-          <option value="1034">Maybach</option>
-          <option value="1035">Mazda</option>
-          <option value="1036">Mercedes-Benz</option>
-          <option value="1037">Mercury</option>
-          <option value="1038">MG</option>
-          <option value="1039">MINI</option>
-          <option value="1040">Mitsubishi</option>
-          <option value="1041">Morgan</option>
-          <option value="1042">Nissan</option>
-          <option value="1043">Opel</option>
-          <option value="1044">Pagani</option>
-          <option value="1045">Peugeot</option>
-          <option value="1047">Pontiac</option>
-          <option value="1048">Porsche</option>
-          <option value="1049">Puch</option>
-          <option value="1050">Qvale</option>
-          <option value="1051">Renault</option>
-          <option value="1052">Rolls-Royce</option>
-          <option value="1053">Rover</option>
-          <option value="1054">Saab</option>
-          <option value="1055">Sauber</option>
-          <option value="1056">Seat</option>
-          <option value="1057">Skoda</option>
-          <option value="1058">Smart</option>
-          <option value="1059">SsangYong</option>
-          <option value="1060">Subaru</option>
-          <option value="1061">Suzuki</option>
-          <option value="1062">Toyota</option>
-          <option value="1063">TVR</option>
-          <option value="1064">Volvo</option>
-          <option value="1065">VW</option>
-          <option value="1066">Wiesmann</option>
-          <option value="9999">Sonstige</option> -->
-          </select>
+        </select>
         <label for="brandSelect">Wähle eine Marke</label>
       </div>
 
       <div class="form-floating mb-3">
-        <select id="modelSelect" name="modelSelect" class="form-select">
+        <select disabled id="modelSelect" name="modelSelect" class="form-select" >
           <option value="" selected disabled hidden></option>
-          <option value="1000">Alfa Romeo</option>
-          <option value="1001">AMC</option>
-          <option value="1002">Aston Martin</option>
-          <option value="1003">Audi</option>
-          <option value="1004">Bentley</option>
-          <option value="1005">BMW</option>
-          <option value="1006">Buick</option>
-          <option value="1007">Cadillac</option>
-          <option value="1008">Chevrolet</option>
-          <option value="1009">Chrysler</option>
-          <option value="1010">Citroen</option>
-          <option value="1011">Dacia</option>
-          <option value="1012">Daewoo</option>
-          <option value="1013">Daihatsu</option>
-          <option value="1014">Dodge</option>
-          <option value="1015">Ferrari</option>
-          <option value="1016">Fiat</option>
-          <option value="1017">Ford</option>
-          <option value="1018">Honda</option>
-          <option value="1019">Hummer</option>
-          <option value="1020">Hyundai</option>
-          <option value="1021">Isuzu</option>
-          <option value="1022">IVECO</option>
-          <option value="1023">Jaguar</option>
-          <option value="1024">Jeep</option>
-          <option value="1025">KIA</option>
-          <option value="1026">Lada</option>
-          <option value="1027">Lamborgini</option>
-          <option value="1028">Lancia</option>
-          <option value="1029">Land Rover</option>
-          <option value="1030">Lexus</option>
-          <option value="1031">Lincoln</option>
-          <option value="1032">Lotus</option>
-          <option value="1033">Maserati</option>
-          <option value="1034">Maybach</option>
-          <option value="1035">Mazda</option>
-          <option value="1036">Mercedes-Benz</option>
-          <option value="1037">Mercury</option>
-          <option value="1038">MG</option>
-          <option value="1039">MINI</option>
-          <option value="1040">Mitsubishi</option>
-          <option value="1041">Morgan</option>
-          <option value="1042">Nissan</option>
-          <option value="1043">Opel</option>
-          <option value="1044">Pagani</option>
-          <option value="1045">Peugeot</option>
-          <option value="1047">Pontiac</option>
-          <option value="1048">Porsche</option>
-          <option value="1049">Puch</option>
-          <option value="1050">Qvale</option>
-          <option value="1051">Renault</option>
-          <option value="1052">Rolls-Royce</option>
-          <option value="1053">Rover</option>
-          <option value="1054">Saab</option>
-          <option value="1055">Sauber</option>
-          <option value="1056">Seat</option>
-          <option value="1057">Skoda</option>
-          <option value="1058">Smart</option>
-          <option value="1059">SsangYong</option>
-          <option value="1060">Subaru</option>
-          <option value="1061">Suzuki</option>
-          <option value="1062">Toyota</option>
-          <option value="1063">TVR</option>
-          <option value="1064">Volvo</option>
-          <option value="1065">VW</option>
-          <option value="1066">Wiesmann</option>
-          <option value="9999">Sonstige</option>
-          </select>
+        </select>
         <label for="modelSelect">Wähle eine Modell</label>
       </div>
       <div class="form-floating mb-3">
@@ -187,7 +53,7 @@
               var currentYear = (new Date()).getFullYear();
   
               //Loop and add the Year values to DropDownList.
-              for (var i = 1970; i <= currentYear; i++) {
+              for (var i = currentYear; i >= 1970; i--) {
                   var option = document.createElement("OPTION");
                   option.innerHTML = i;
                   option.value = i;
@@ -205,18 +71,23 @@
       </div>
       <div class="card mb-3">
         <div class="card-body">
-          <h6 class="card-title">Land auswählen</h6>
+          <h6 class="card-title">Region auswählen</h6>
           <p class="card-text">
-            <div class="container">
-              <div class="row">
+            <div class="container" id="regionsContainer">
+              <!-- <div class="form-check">
+                <input class="form-check-input region-checkbox" type="checkbox" value="Niederösterreich" name="Niederösterreich" id="Niederösterreich">
+                <label class="form-check-label" for="Niederösterreich">Österreich</label>
+              </div>
+              <div class="form-check"><input class="form-check-input region-checkbox" type="checkbox" value="Nö" name="region" id="region-Nö"><label class="form-check-label" for="region-Nö">Österreich</label></div>
+              <div class="form-check"><input class="form-check-input region-checkbox" type="checkbox" value="1010" name="region" id="region-1010"><label class="form-check-label" for="region-1010">Deutschland</label></div>
+              <div class="form-check"><input class="form-check-input region-checkbox" type="checkbox" value="1020" name="region" id="region-1020"><label class="form-check-label" for="region-1020">Schweiz</label></div>
+               -->
+              <!-- <div class="row">
                 <div class="col">
 
-                  <div class="form-check"><input class="form-check-input region-checkbox" type="checkbox" value="Nö" name="region" id="region-Nö"><label class="form-check-label" for="region-Nö">Österreich</label></div>
-                  <div class="form-check"><input class="form-check-input region-checkbox" type="checkbox" value="1010" name="region" id="region-1010"><label class="form-check-label" for="region-1010">Deutschland</label></div>
-                  <div class="form-check"><input class="form-check-input region-checkbox" type="checkbox" value="1020" name="region" id="region-1020"><label class="form-check-label" for="region-1020">Schweiz</label></div>
-                  
+
                 </div>
-              </div>
+              </div> -->
             </div>
           </p>
         </div>
@@ -235,8 +106,8 @@
         <label for="engineSelect">Motortyp</label>
       </div>
       <div>
-        <textarea name="features" id="features" cols="30" rows="10"></textarea>
-        <label for="features">Features</label>
+        <label for="features">Features:</label>
+        <textarea class="form-control mb-4" name="features" id="features" cols="70" rows="5"></textarea>
       </div>
       <div class="form-floating mb-3">
         <a class="btn btn-secondary" href="./">
@@ -251,5 +122,7 @@
     <script src="js/jquery-3.6.0.min.js"></script>
     <script src="js/shared.js"></script>
     <script src="js/searchAgent.js"></script>
+    <script src="js/brands.js"></script>
+    <script src="js/regions.js"></script>
   </body>
 </html>

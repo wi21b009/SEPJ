@@ -20,6 +20,7 @@ $(document).ready(function () {
       url: API_PATH + "?resource=getSearchAgents",
       success: function (data) {
         $("#searchAgent-list").removeClass("invisible");
+        //console.log("getSearchAgents", data);
         showSearchAgents(data);
       },
       error: function (xhr, ajaxOptions, thrownError) {
@@ -35,13 +36,20 @@ $(document).ready(function () {
 
   function showSearchAgents(searchAgents) {
     for (const searchAgent of searchAgents) {
-      const editLink = `./searchAgent.html?id=${searchAgent.id}&brand=${searchAgent.brand}&maxPrice=${searchAgent.maxPrice}&yearOfManufacture=${searchAgent.yearOfManufacture}&mileage=${searchAgent.mileage}&regions=${searchAgent.regions}`;
-      const row = $(`<tr>
+      console.log(searchAgent);
+      const editLink = `./searchAgent.html?id=${searchAgent.id}&brand=${searchAgent.brand}&maxPrice=${searchAgent.maxPrice}&yearOfManufacture=${searchAgent.yearOfManufacture}&mileage=${searchAgent.mileage}&region=${searchAgent.region}&engine=${searchAgent.engine}&features=${searchAgent.features}`;
+      const row = $(`<tr scope="col">
         <!--<td>${searchAgent.id}</td>-->
         <td>${searchAgent.brand}</td>
-        <td>${searchAgent.maxPrice}</td>
-        <td>${searchAgent.yearOfManufacture}m² - ${searchAgent.mileage}m²</td>
-        <td>${searchAgent.regions.map((id) => REGION_NAMES[id]).join(", ")}</td>
+        <td>${searchAgent.model}</td>
+        <td>${searchAgent.maxPrice === null ? "" : searchAgent.maxPrice}</td>
+        <td>${searchAgent.yearOfManufacture === null ? "" : searchAgent.yearOfManufacture}</td>
+        <td>${searchAgent.mileage === null ? "" : searchAgent.mileage}</td>
+        <td>${searchAgent.country}</td>
+        <td>${searchAgent.region}</td>
+        <td>${searchAgent.engine}</td>
+        <td>${searchAgent.features}</td>
+        <td>${searchAgent.isActive ? "aktiv" : "inaktiv"}</td>
         <td class="text-end">
             <a class="btn btn-sm btn-secondary edit">Bearbeiten</a>
             <button type="button" class="btn btn-sm btn-secondary delete">Löschen</button>
