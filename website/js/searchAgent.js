@@ -1,30 +1,4 @@
-//const cars = require("./website/backend/models/cars.json");
-
 $(document).ready(function () {
-  
-  function createBrandSelect(cars) {
-    const brandSelect = $("#brandSelect");
-    const selectElement = document.createElement("select");
-
-    cars.forEach(car => {
-        const optionElement = document.createElement("option");
-        optionElement.value = car.value;
-        optionElement.textContent = car.label;
-        selectElement.appendChild(optionElement);
-    });
-
-
-  brandSelect.append(selectElement);
-  }
-
-  fetch('./website/backend/models/cars.json')
-    .then(response => response.json())
-    .then(data => {
-        const cars = data;
-        // You can now use 'cars' here
-        createBrandSelect(cars);
-    })
-    .catch(error => console.error('Error:', error));
 
   let updateExistingId = null;
 
@@ -64,26 +38,34 @@ $(document).ready(function () {
   }
 
   $("#btnCreateSearchAgent").on("click", function () {
-    const brandSelect = $("#brandSelect option:selected").text();
-    const maxPrice = parseFloat($("#maxPrice").val());
-    let yearOfManufacture = parseInt($("#yearOfManufacture").val());
-    let mileage = parseInt($("#mileage").val());
+    const brand = $("#brandSelect option:selected").text();
+    const model = $("#modelSelect option:selected").text();
+    const maxPrice = parseInt($("#maxPrice").val());
+    const yearOfManufacture = parseInt($("#yearOfManufacture").val());
+    const mileage = parseInt($("#mileage").val());
+    const engine = $("#engineSelect option:selected").text();
+    //const country = $(".region-checkbox:checked")
     const regions = $(".region-checkbox:checked")
       .get()
       .map((element) => element.value);
+    const features = $("#features").val();
 
-    if (regions.length === 0) {
-      alert("Mindestens eine Region muss ausgewählt werden");
+    if (regions.length === 0 && brand === "" && model === "" && features === "" && engine === "" && isNaN(maxPrice) && isNaN(yearOfManufacture) && isNaN(mileage)) {
+      alert("Mindestens ein Feld muss ausgefüllt werden!");
       return;
     }
 
     const searchAgentData = {
-      brandSelect,
+      brand,
+      model,
       maxPrice,
       yearOfManufacture,
       mileage,
+      engine,
+      features,
       regions,
     };
+    console.log(searchAgentData);
     if (updateExistingId) {
       searchAgentData.id = updateExistingId;
       updateSearchAgent(searchAgentData);
@@ -106,19 +88,27 @@ $(document).ready(function () {
             option.selected = true;
           }
         });
+      const modelSelect = params.get("modelSelect");
+      $("#modelSelect option")
+        .get()
+        .forEach((option) => {
+          if (option.textContent === modelSelect) {
+            option.selected = true;
+          }
+        });
       $("#maxPrice").val(params.get("maxPrice"));
       $("#yearOfManufacture").val(params.get("yearOfManufacture"));
       $("#mileage").val(params.get("mileage"));
-      const regions = params.get("regions").split(",");
-      for (const region of regions) {
-        $(`#region-${region}`).prop("checked", true);
-      }
+      //TODO:fix updating regions
+      // const regions = params.get("regions").split(",");
+      // for (const region of regions) {
+      //   $(`#region-${region}`).prop("checked", true);
+      // }
+      //$(`#${region}`).prop("checked", true);
       $("#btnCreateSearchAgent").text("Änderungen übernehmen");
-      $("#pageTitle").text("Price-SearchAgent bearbeiten");
+      $("#pageTitle").text("Suchagent bearbeiten");
     }
   }
-
-//TODO:find out how to import cars.js
 
 
 });
