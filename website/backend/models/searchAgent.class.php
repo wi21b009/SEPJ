@@ -4,6 +4,7 @@ class SearchAgent
 {
 
     public $id;
+    public $userId;
     public $brand;
     public $model;
     public $maxPrice;
@@ -17,6 +18,7 @@ class SearchAgent
 
     public function __construct(
         $id,
+        $userId,
         $brand,
         $model,
         $maxPrice,
@@ -29,6 +31,7 @@ class SearchAgent
         $isActive
     ) {
         $this->id = $id;
+        $this->userId = $userId;
         $this->brand = $brand;
         $this->model = $model;
         $this->maxPrice = $maxPrice;

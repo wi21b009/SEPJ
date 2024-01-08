@@ -1,4 +1,7 @@
 <?php
+if (!isset($_SESSION)) {
+    session_start();
+}
 
 require_once "./config/dataHandler.php";
 require_once "./models/user.class.php";
@@ -65,7 +68,6 @@ class BusinessLogic
         }
 
         $data = json_decode(file_get_contents("php://input"));
-
         switch ($_GET['action']) {
             case "register":
                 $this->processRegister($data);
@@ -126,9 +128,6 @@ class BusinessLogic
 
     private function getCurrentUserId()
     {
-        if (!isset($_SESSION)) {
-            session_start();
-        }
         if (!isset($_SESSION["user"]) || !isset($_SESSION["user"]["user_id"])) {
             return null;
         } else {
@@ -198,6 +197,7 @@ class BusinessLogic
             $this->error(400, [], "Not logged in!");
         }
         if (($result = $this->dh->createSearchAgent($user_id, $searchAgentData)) === false) {
+            echo $result;
             $this->error(400, [], "Bad Request - There was an error creating the searchAgent");
         }
         $this->success(200, $result);

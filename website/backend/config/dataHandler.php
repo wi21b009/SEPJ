@@ -37,17 +37,6 @@ class Datahandler
         $sql = "SELECT id, username, password, email from users where username = $1";
         $stmt = pg_prepare($db_obj, "", $sql);
 
-        // if ($stmt) {
-        //     $result = pg_execute($db_obj, "", array($loginData->username));
-        //     if ($row = pg_fetch_assoc($result)) {
-        //         $user_id = $row['id'];
-        //         $username = $row['username'];
-        //         $currentPassword = $row['password'];
-        //         $email = $row['email'];
-        //         $is_active = $row['is_active'];
-        //         // ...
-        //     }
-        // }
         if ($stmt) {
             $result = pg_execute($db_obj, "", array($loginData->username));
             if ($row = pg_fetch_assoc($result)) {
@@ -141,16 +130,16 @@ class Datahandler
     function createSearchAgent($user_id, $searchAgentData)
     {
         $db_obj = $this->getDb();
-        //TODO:define query
-        $sql = "INSERT INTO searchAgents() VALUES ($1, $2, $3, $4, $5, $6)";
+        $regions = join(",", $searchAgentData->regions);
+        //TODO fix country
+        $sql = "INSERT INTO search_parameters(brand, model, price, year_of_manufacture, mileage, engine, features, user_id, country, region) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);";
         $stmt = pg_prepare($db_obj, "", $sql);
         if (!$stmt) {
             $this->handleError($db_obj);
         }
 
-        $regions = join(",", $searchAgentData->regions);
         //bind params
-        $params = array($param1, $param2, $param3, $param4, $param5, $param6); // Replace $param1, $param2, ... with actual values
+        $params = array($searchAgentData->brand, $searchAgentData->model, $searchAgentData->maxPrice, $searchAgentData->yearOfManufacture, $searchAgentData->mileage, $searchAgentData->engine, $searchAgentData->features, $user_id, 'Österreich', $regions);
         $result = pg_execute($db_obj, "", $params);
 
         if ($result) {
@@ -163,19 +152,19 @@ class Datahandler
         }
     }
 
+    //TODO: refactor to psql
     function updateSearchAgent($user_id, $searchAgentData)
     {
         $db_obj = $this->getDb();
         //TODO:define query
-        $sql = "UPDATE searchAgents SET ....... WHERE userId = $1 AND id = $2";
+        $sql = "UPDATE search_parameters SET brand = $1, model = $2, price = $3, year_of_manufacture = $4, mileage = $5, engine = $6, features = $7, country = $8, region = $9 WHERE user_id = $10 AND id = $11;";
         $stmt = pg_prepare($db_obj, "", $sql);
         if (!$stmt) {
             $this->handleError($db_obj);
         }
 
-        $districts = join(",", $searchAgentData->districts);
         //bind params
-        $params = array($user_id, $searchAgent_id);
+        $params = array($searchAgentData->brand, $searchAgentData->model, $searchAgentData->maxPrice, $searchAgentData->yearOfManufacture, $searchAgentData->mileage, $searchAgentData->engine, $searchAgentData->features, $searchAgentData->country, $searchAgentData->region, $user_id, $searchAgentData->id);
         $result = pg_execute($db_obj, "", $params);
 
         if ($result) {
@@ -192,7 +181,7 @@ class Datahandler
     {
         $db_obj = $this->getDb();
 
-        $sql = "DELETE FROM searchAgents WHERE userId = $1 AND id = $2";
+        $sql = "DELETE FROM search_parameters WHERE user_id = $1 AND id = $2";
         $stmt = pg_prepare($db_obj, "", $sql);
         if (!$stmt) {
             $this->handleError($db_obj);
@@ -220,7 +209,7 @@ class Datahandler
         $db_obj = $this->getDb();
 
         //TODO:define query
-        $sql = "SELECT * FROM searchAgents WHERE userId = $1 ORDER BY id DESC";
+        $sql = "SELECT * FROM search_parameters WHERE user_id = $1 ORDER BY id DESC;";
         $stmt = pg_prepare($db_obj, "", $sql);
         if (!$stmt) {
             $this->handleError($db_obj);
@@ -232,9 +221,20 @@ class Datahandler
         // loop through all results
         while ($row = pg_fetch_assoc($result)) {
             // TODO: convert it into a SearchAgent instance
-            // $searchAgent = new SearchAgent(
-
-            // );
+            $searchAgent = new SearchAgent(
+                $row['id'],
+                $row['user_id'],
+                $row['brand'],
+                $row['model'],
+                $row['price'],
+                $row['mileage'],
+                $row['year_of_manufacture'],
+                $row['country'],
+                $row['region'],
+                $row['engine'],
+                $row['features'],
+                $row['isActive'],
+            );
 
             // and add it to the array
             array_push($searchAgents, $searchAgent);
