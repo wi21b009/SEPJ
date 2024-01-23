@@ -6,4 +6,6 @@ SELECT * FROM offers; --check if the data is inserted correctly in the offers ta
 
 SELECT * FROM sent_offers; --check if the data is inserted correctly in the sent_offers table
 
+DELETE FROM sent_offers; --delete all data from the sent_offers table
+
 SELECT * FROM search_parameters; --check if the data is inserted correctly in the search_parameters table

@@ -50,6 +50,8 @@ def send_mail():
                 message["To"] = receiver_email
                 message["Subject"] = "Your crawled offers"
 
+                print(f"Sending email to user ID: {user_id} with new offers.")
+
                 # Constructing the HTML body for the email
                 html = "<html><body>"
                 html += f"<h2>Suchparameter für Benutzer ID: {user_id}</h2>"
