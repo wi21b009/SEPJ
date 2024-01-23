@@ -5,6 +5,7 @@
 # Import the psycopg2 module
 import psycopg2
 
+
 def create_connection():
     try:
         # Connect to the database

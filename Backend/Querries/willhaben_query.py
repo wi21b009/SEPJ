@@ -3,13 +3,26 @@ from bs4 import BeautifulSoup;
 import sys;
 import urllib.request
 import re
+import os
 
 # Import the Car class from the cars.py file
-sys.path.append("c:\\Users\\Tobias\\OneDrive - FH Technikum Wien\\Dokumente\\FH\\5. Semester\\SEPJ\\SEPJ\\Backend")
+current_directory = os.path.dirname(os.path.abspath(__file__))
+db_directory = os.path.join(current_directory, "..")
+
+# Add the relative path to sys.path
+sys.path.append(db_directory)
+
 from cars import Car;
 
+
+# Import the Car class from the cars.py file
+
 # Import the upload_data function from the dbConnect.py file
-sys.path.append("c:\\Users\\Tobias\\OneDrive - FH Technikum Wien\\Dokumente\\FH\\5. Semester\\SEPJ\\SEPJ\\Backend\\DB")
+db_directory = os.path.join(current_directory, "..\\DB")
+
+# Add the relative path to sys.path
+sys.path.append(db_directory)
+
 from dbUpload import upload_data;
 
 

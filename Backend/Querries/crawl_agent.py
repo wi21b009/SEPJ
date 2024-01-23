@@ -1,6 +1,7 @@
 # This agent fethches all the data from the 'search_parameters' table and then starts the crawling process.
 import sys;
 import time
+import os
 
 
 # Import necessary modules
@@ -8,7 +9,12 @@ from willhaben_url_builder import get_dynamic_url;
 from willhaben_query import querry_willhaben;
 
 # Import the dbConnect module
-sys.path.append("c:\\Users\\Tobias\\OneDrive - FH Technikum Wien\\Dokumente\\FH\\5. Semester\\SEPJ\\SEPJ\\Backend\\DB")
+current_directory = os.path.dirname(os.path.abspath(__file__))
+db_directory = os.path.join(current_directory, "..\\DB")
+
+# Add the relative path to sys.path
+sys.path.append(db_directory)
+
 from dbConnect import create_connection, close_connection
 
 

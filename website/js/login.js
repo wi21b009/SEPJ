@@ -9,7 +9,7 @@ $(document).ready(function () {
 
     executeLogin({
       username,
-      password,
+      password
     });
   });
 

@@ -1,8 +1,15 @@
 import sys
 import pandas as pd
+import os
 
 # Import the dbConnect module
-sys.path.append("c:\\Users\\Tobias\\OneDrive - FH Technikum Wien\\Dokumente\\FH\\5. Semester\\SEPJ\\SEPJ\\Backend\\DB")
+current_directory = os.path.dirname(os.path.abspath(__file__))
+db_directory = os.path.join(current_directory, "..\\DB")
+
+# Add the relative path to sys.path
+sys.path.append(db_directory)
+
+#sys.path.append("c:\\XAMPP\\htdocs\\SEPJ\\Backend\\DB")
 from dbConnect import create_connection, close_connection
 
 # ------------ FUNCTIONS ------------
