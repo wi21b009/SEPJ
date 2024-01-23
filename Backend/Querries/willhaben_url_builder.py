@@ -83,8 +83,48 @@ def build_url_from_database(base_url, id):
             "CAR_MODEL/MODEL": search_params[3],
             "MILEAGE_TO": str(search_params[4]),
             "YEAR_MODEL_FROM": str(search_params[5]),
-            "PRICE_TO": str(search_params[8])
+            "areaId": str(search_params[7]),
+            "PRICE_TO": str(search_params[8]),
+            "ENGINE/FUEL": str(search_params[9])
         }
+
+        # Translate Benzin to 100001, Diesel to 100003, Elektro to 100004, Gas to 100011, ...
+        if search_params_dict['ENGINE/FUEL'] == 'Benzin':
+            search_params_dict['ENGINE/FUEL'] = '100001'
+        elif search_params_dict['ENGINE/FUEL'] == 'Diesel':
+            search_params_dict['ENGINE/FUEL'] = '100003'
+        elif search_params_dict['ENGINE/FUEL'] == 'Elektro':
+            search_params_dict['ENGINE/FUEL'] = '100004'
+        elif search_params_dict['ENGINE/FUEL'] == 'Gas':
+            search_params_dict['ENGINE/FUEL'] = '100011'
+        elif search_params_dict['ENGINE/FUEL'] == 'Hybrid Elektro/Benzin':
+            search_params_dict['ENGINE/FUEL'] = '100013'
+        elif search_params_dict['ENGINE/FUEL'] == 'Hybrid Elektro/Diesel':
+            search_params_dict['ENGINE/FUEL'] = '100022'
+        elif search_params_dict['ENGINE/FUEL'] == 'Wasserstoff':
+            search_params_dict['ENGINE/FUEL'] = '110000'
+
+        # Translate Wien to 900, Niederösterreich to 1000, Oberösterreich to 2000, ...
+        if search_params_dict['areaId'] == 'Wien':
+            search_params_dict['areaId'] = '900'
+        elif search_params_dict['areaId'] == 'Niederösterreich':
+            search_params_dict['areaId'] = '3'
+        elif search_params_dict['areaId'] == 'Oberösterreich':
+            search_params_dict['areaId'] = '4'
+        elif search_params_dict['areaId'] == 'Steiermark':
+            search_params_dict['areaId'] = '6'
+        elif search_params_dict['areaId'] == 'Kärnten':
+            search_params_dict['areaId'] = '2'
+        elif search_params_dict['areaId'] == 'Salzburg':
+            search_params_dict['areaId'] = '5'
+        elif search_params_dict['areaId'] == 'Tirol':
+            search_params_dict['areaId'] = '7'
+        elif search_params_dict['areaId'] == 'Vorarlberg':
+            search_params_dict['areaId'] = '8'
+        elif search_params_dict['areaId'] == 'Burgenland':
+            search_params_dict['areaId'] = '1'
+        elif search_params_dict['areaId'] == 'andere Länder':
+            search_params_dict['areaId'] = '22000'
 
         # Translate brand and model text to codes using an Excel file (Brands.xlsx)
         brand_translation = pd.read_excel("C:\\Users\\Tobias\\OneDrive - FH Technikum Wien\\Dokumente\\FH\\5. Semester\\SEPJ\\SEPJ\\Backend\\Querries\\Brands.xlsx", sheet_name="Brands")
