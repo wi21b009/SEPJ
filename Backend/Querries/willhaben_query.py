@@ -188,7 +188,7 @@ def get_willhaben_query(url, user_id):
 
 
 # Function to querry the willhaben website
-def querry_willhaben(url):
+def querry_willhaben(url, user_id):
     # Create an empty list to store car URLs
     carsUrl = []
 
@@ -217,7 +217,7 @@ def querry_willhaben(url):
     # Loop through the list of car URLs and scrape data for each car
     for car in carsUrl:
         print("Scraping URL:", car)
-        car_instance = get_willhaben_query(car)
+        car_instance = get_willhaben_query(car, user_id)
         upload_data(car_instance)
         counter += 1
 

@@ -24,8 +24,8 @@ def upload_data(car):
             # Example: Insert data into the cars table
             cursor.execute("""
                 INSERT INTO cars 
-                (brand, model, mileage, year_of_manufacture, country, region, price, engine, features, offer_link) 
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                (brand, model, mileage, year_of_manufacture, country, region, price, engine, features, offer_link, user_id) 
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             """, (
                 car.brand,
                 car.model,
@@ -36,7 +36,8 @@ def upload_data(car):
                 car.price,
                 car.engine,
                 car.features,
-                car.offer_link
+                car.offer_link,
+                car.user_id
             ))
 
             # Commit the transaction
