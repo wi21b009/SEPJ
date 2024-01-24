@@ -20,8 +20,6 @@ CREATE TABLE cars (
   features TEXT
 );
 
-
-
 -- User table
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
@@ -30,6 +28,8 @@ CREATE TABLE users (
   password VARCHAR (255) NOT NULL,
   is_active BOOLEAN NOT NULL DEFAULT TRUE
 );
+
+ALTER TABLE cars ADD COLUMN user_id INT REFERENCES users(id);
 
 -- Search Parameters table
 CREATE TABLE search_parameters (
