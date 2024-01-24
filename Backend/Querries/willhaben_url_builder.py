@@ -128,8 +128,20 @@ def build_url_from_database(base_url, id):
 
         # Translate brand and model text to codes using an Excel file (Brands.xlsx)
         #brand_translation = pd.read_excel("C:\\Users\\Tobias\\OneDrive - FH Technikum Wien\\Dokumente\\FH\\5. Semester\\SEPJ\\SEPJ\\Backend\\Querries\\Brands.xlsx", sheet_name="Brands")
-        brand_translation = pd.read_excel("Brands.xlsx", sheet_name="Brands")
-        model_translation = pd.read_excel("Brands.xlsx", sheet_name="Model")
+        
+        # Get the directory of the current script
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+
+        # Construct the full path to the 'Brands.xlsx' file
+        excel_file_path = os.path.join(current_directory, "Brands.xlsx")
+
+        # Read the Excel file
+        brand_translation = pd.read_excel(excel_file_path, sheet_name="Brands")
+        model_translation = pd.read_excel(excel_file_path, sheet_name="Model")
+        
+        
+        #brand_translation = pd.read_excel("Brands.xlsx", sheet_name="Brands")
+        #model_translation = pd.read_excel("Brands.xlsx", sheet_name="Model")
         translate_brand_model(search_params_dict, brand_translation, model_translation)
 
         # Build and return the complete URL
