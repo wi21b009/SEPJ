@@ -53,6 +53,17 @@ CREATE TABLE offers (
   offer_link TEXT
 );
 
+ALTER TABLE offers ADD COLUMN updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+
+CREATE TABLE sent_offers (
+    user_id INT,
+    offer_id INT,
+    sent_timestamp TIMESTAMP,
+    PRIMARY KEY (user_id, offer_id)
+);
+
+
 CREATE EXTENSION IF NOT EXISTS pgcrypto; --has to be installed on the server to use the pgcrypto module
 
 SELECT * FROM pg_extension; --check if pgcrypto is installed
