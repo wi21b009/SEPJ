@@ -31,7 +31,7 @@ from dbUpload import upload_data;
 print("Willhaben Query")
 
 # Define a function to scrape data from a Willhaben query URL
-def get_willhaben_query(url):
+def get_willhaben_query(url, user_id):
     print("Willhaben_query URL:", url)
     try:
         # Open the URL and read the HTML content
@@ -175,7 +175,8 @@ def get_willhaben_query(url):
             price=price,
             engine=engine,
             features=features,
-            offer_link=url
+            offer_link=url,
+            user_id=user_id
         )
 
         return car_instance

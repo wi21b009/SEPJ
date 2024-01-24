@@ -27,7 +27,7 @@ def fetch_search_ids():
 
         # Fetch all id from search requests with search queries
         cursor.execute("""
-            SELECT DISTINCT id FROM search_parameters
+            SELECT DISTINCT id, user_id FROM search_parameters
             WHERE is_active = TRUE
             ORDER BY id ASC;
         """)
@@ -45,20 +45,21 @@ def fetch_search_ids():
 
 def start_crawling():
     # Fetch all ids from active searches
-    ids = fetch_search_ids()
+    rows = fetch_search_ids()
 
     # Iterate over all user ids
-    for id in ids:
-        print("Id of search:", id[0])
-        willhaben_url = get_dynamic_url(id[0])
+    for row in rows:
+        id, user_id = row
+        print("Id of search:", id)
+        willhaben_url = get_dynamic_url(id)
         print(willhaben_url)
         
         # Perform the crawling
-        results = querry_willhaben(willhaben_url)
+        results = querry_willhaben(willhaben_url, user_id)
         
         # Set is_active to FALSE after crawling, if results were found
         if results > 0:
-            set_search_parameters_inactive(id[0])
+            set_search_parameters_inactive(id)
 
         # Add a delay between crawls if needed
         time.sleep(2)  # Adjust the delay as needed
