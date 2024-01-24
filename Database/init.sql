@@ -20,6 +20,8 @@ CREATE TABLE cars (
   features TEXT
 );
 
+ALTER TABLE cars ADD COLUMN user_id INT REFERENCES users(id);
+
 -- User table
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
