@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS offers;
 DROP TABLE IF EXISTS search_parameters;
 DROP TABLE IF EXISTS cars;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS sent_offers;
 
 -- create tabel cars
 CREATE TABLE cars (
@@ -86,28 +87,28 @@ INSERT INTO users (username, email, password, is_active) VALUES
 -- Search Parameters test data
 INSERT INTO search_parameters (user_id, brand, model, mileage, year_of_manufacture, country, region, price, engine, is_active) VALUES
 (1, 'Volkswagen', 'Golf', 50000, 2018, 'Österreich', 'Wien', 15000, 'Diesel', TRUE),
-(1, 'Toyota', 'Camry', 20000, 2020, 'Österreich', 'St. Pölten', 20000, 'Diesel', FALSE),
-(2, 'Ford', 'Mustang', 50000, 1990, 'Österreich', 'Graz', 30000, 'Benzin', TRUE),
+(1, 'Toyota', 'Camry', 20000, 2020, 'Österreich', 'Niederösterreich', 20000, 'Diesel', FALSE),
+(2, 'Ford', 'Mustang', 50000, 1990, 'Österreich', 'Salzburg', 30000, 'Benzin', TRUE),
 (1, 'Volkswagen', 'Golf', 50000, 2018, 'Österreich', 'Wien', 15000, 'Diesel', TRUE),
-(1, 'Toyota', 'Camry', 20000, 2020, 'Österreich', 'St. Pölten', 20000, 'Diesel', FALSE),
-(1, 'Ford', 'Mustang', 50000, 1990, 'Österreich', 'Graz', 30000, 'Benzin', TRUE),
+(1, 'Toyota', 'Camry', 20000, 2020, 'Österreich', 'Niederösterreich', 20000, 'Diesel', FALSE),
+(1, 'Ford', 'Mustang', 50000, 1990, 'Österreich', 'Salzburg', 30000, 'Benzin', TRUE),
 (2, 'Audi', 'A4', 30000, 2021, 'Österreich', 'Wien', 25000, 'Benzin', TRUE),
 (2, 'BMW', '3 Series', 40000, 2020, 'Österreich', 'Salzburg', 35000, 'Diesel', FALSE),
-(3, 'Toyota', 'Corolla', 25000, 2019, 'Österreich', 'Linz', 18000, 'Benzin', TRUE),
+(3, 'Toyota', 'Corolla', 25000, 2019, 'Österreich', 'Oberösterreich', 18000, 'Benzin', TRUE),
 (3, 'Ford', 'Mustang', 45000, 2019, 'Österreich', 'Salzburg', 30000, 'Benzin', TRUE),
-(3, 'Volkswagen', 'Passat', 35000, 2018, 'Österreich', 'Graz', 22000, 'Diesel', FALSE),
+(3, 'Volkswagen', 'Passat', 35000, 2018, 'Österreich', 'Wien', 22000, 'Diesel', FALSE),
 (3, 'Audi', 'A4', 30000, 2021, 'Österreich', 'Wien', 25000, 'Benzin', TRUE),
 (4, 'BMW', '3 Series', 40000, 2020, 'Österreich', 'Salzburg', 35000, 'Diesel', FALSE),
-(4, 'Toyota', 'Corolla', 25000, 2019, 'Österreich', 'Linz', 18000, 'Benzin', TRUE),
-(5, 'Volkswagen', 'Passat', 35000, 2018, 'Österreich', 'Graz', 22000, 'Diesel', FALSE),
+(4, 'Toyota', 'Corolla', 25000, 2019, 'Österreich', 'Wien', 18000, 'Benzin', TRUE),
+(5, 'Volkswagen', 'Passat', 35000, 2018, 'Österreich', 'Wien', 22000, 'Diesel', FALSE),
 (5, 'Audi', 'A4', 30000, 2021, 'Österreich', 'Wien', 25000, 'Benzin', TRUE),
 (6, 'Ford', 'Mustang', 45000, 2019, 'Österreich', 'Salzburg', 30000, 'Benzin', TRUE),
 (6, 'BMW', '3 Series', 40000, 2020, 'Österreich', 'Salzburg', 35000, 'Diesel', FALSE),
-(7, 'Toyota', 'Corolla', 25000, 2019, 'Österreich', 'Linz', 18000, 'Benzin', TRUE),
+(7, 'Toyota', 'Corolla', 25000, 2019, 'Österreich', 'Niederösterreich', 18000, 'Benzin', TRUE),
 (7, 'Ford', 'Mustang', 45000, 2019, 'Österreich', 'Salzburg', 30000, 'Benzin', TRUE),
-(8, 'Volkswagen', 'Passat', 35000, 2018, 'Österreich', 'Graz', 22000, 'Diesel', FALSE),
+(8, 'Volkswagen', 'Passat', 35000, 2018, 'Österreich', 'Salzburg', 22000, 'Diesel', FALSE),
 (8, 'Audi', 'A4', 30000, 2021, 'Österreich', 'Wien', 25000, 'Benzin', TRUE),
-(9, 'Toyota', 'Corolla', 25000, 2019, 'Österreich', 'Linz', 18000, 'Benzin', TRUE),
+(9, 'Toyota', 'Corolla', 25000, 2019, 'Österreich', 'Oberösterreich', 18000, 'Benzin', TRUE),
 (9, 'Ford', 'Mustang', 45000, 2019, 'Österreich', 'Salzburg', 30000, 'Benzin', TRUE),
 (10, 'Volkswagen', 'Passat', 35000, 2018, 'Österreich', 'Graz', 22000, 'Diesel', FALSE),
 (10, 'Audi', 'A4', 30000, 2021, 'Österreich', 'Wien', 25000, 'Benzin', TRUE);
