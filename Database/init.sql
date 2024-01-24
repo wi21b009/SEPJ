@@ -29,8 +29,6 @@ CREATE TABLE users (
   is_active BOOLEAN NOT NULL DEFAULT TRUE
 );
 
-ALTER TABLE cars ADD COLUMN user_id INT REFERENCES users(id);
-
 -- Search Parameters table
 CREATE TABLE search_parameters (
   id SERIAL PRIMARY KEY,
@@ -66,7 +64,7 @@ CREATE TABLE sent_offers (
     PRIMARY KEY (user_id, offer_id)
 );
 
---ALTER TABLE cars ADD COLUMN user_id INT REFERENCES users(id);
+ALTER TABLE cars ADD COLUMN user_id INT REFERENCES users(id);
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto; --has to be installed on the server to use the pgcrypto module
 

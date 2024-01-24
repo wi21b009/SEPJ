@@ -53,21 +53,15 @@ def send_mail():
 
                 # Constructing the HTML body for the email
                 html = "<html><body>"
-                html += f"<h2>Suchparameter für Benutzer ID: {user_id}</h2>"
-                html += "<table border='1'><tr><th>ID</th><th>Marke</th><th>Modell</th><th>Kilometerstand</th><th>Baujahr</th><th>Land</th><th>Region</th><th>Preis</th><th>Motor</th><th>Merkmale</th><th>Aktiv</th></tr>"
-                
-                for row in search_parameters:
-                    html += "<tr>" + "".join([f"<td>{str(item)}</td>" for item in row]) + "</tr>"
-                html += "</table>"
-
                 html += "<h2>Passende Autos und Angebote</h2>"
-                html += "<table border='1'><tr><th>ID</th><th>Marke</th><th>Modell</th><th>Kilometerstand</th><th>Baujahr</th><th>Land</th><th>Region</th><th>Preis</th><th>Motor</th><th>Merkmale</th><th>Angebotslink</th></tr>"
+                html += "<table border='1'><tr><th>ID</th><th>Marke</th><th>Modell</th><th>Kilometerstand</th><th>Baujahr</th><th>Land</th><th>Region</th><th>Preis</th><th>Motor</th><th>Angebotslink</th><th>Features</th><th>Klicke hier</th></tr>"
 
                 for row in new_offers:
-                    html += "<tr>" + "".join([f"<td>{str(item)}</td>" for item in row[:-1]]) + f"<td><a href='{row[-1]}'>{row[-1]}</a></td></tr>"
+                    html += "<tr>" + "".join([f"<td>{str(item)}</td>" for item in row[:-1]]) + f"<td><a href='{row[-3]}'>{row[-3]}</a></td></tr>"
                 html += "</table></body></html>"
 
                 message.attach(MIMEText(html, "html"))
+
 
                 # SMTP server configuration and email sending
                 with smtplib.SMTP(config.smtp_server, config.smtp_port) as server:
