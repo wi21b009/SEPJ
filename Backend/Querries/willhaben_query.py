@@ -114,7 +114,7 @@ def get_willhaben_query(url):
 
         #               CAR DATA
         # Find the <ul> element with the specific class
-        target_div = soup.find('ul', class_='sc-72e3a87a-0 fpmBa-d')
+        target_div = soup.find('ul', class_='sc-72e3a87a-0 eAlPjW')
 
         # Extract all the text from the found <div> element
         if target_div:
@@ -148,7 +148,7 @@ def get_willhaben_query(url):
             print("Mileage:", mileage)
             print("Engine:", engine)
         else:
-            print("Div element not found with the specified class.")
+            print("Div element (Fahrzeugdaten) not found with the specified class.")
 
         #           CAR DESCRIPTION
         # Find all <li> elements with the specified data-testid attribute

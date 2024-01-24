@@ -127,8 +127,9 @@ def build_url_from_database(base_url, id):
             search_params_dict['areaId'] = '22000'
 
         # Translate brand and model text to codes using an Excel file (Brands.xlsx)
-        brand_translation = pd.read_excel("C:\\Users\\Tobias\\OneDrive - FH Technikum Wien\\Dokumente\\FH\\5. Semester\\SEPJ\\SEPJ\\Backend\\Querries\\Brands.xlsx", sheet_name="Brands")
-        model_translation = pd.read_excel("C:\\Users\\Tobias\\OneDrive - FH Technikum Wien\\Dokumente\\FH\\5. Semester\\SEPJ\\SEPJ\\Backend\\Querries\\Brands.xlsx", sheet_name="Model")
+        #brand_translation = pd.read_excel("C:\\Users\\Tobias\\OneDrive - FH Technikum Wien\\Dokumente\\FH\\5. Semester\\SEPJ\\SEPJ\\Backend\\Querries\\Brands.xlsx", sheet_name="Brands")
+        brand_translation = pd.read_excel("Brands.xlsx", sheet_name="Brands")
+        model_translation = pd.read_excel("Brands.xlsx", sheet_name="Model")
         translate_brand_model(search_params_dict, brand_translation, model_translation)
 
         # Build and return the complete URL
