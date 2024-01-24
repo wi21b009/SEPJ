@@ -4,7 +4,11 @@ from dbConnect import create_connection, close_connection
 
 
 # Import the Car class from the cars.py file
-sys.path.append("c:\\Users\\Tobias\\OneDrive - FH Technikum Wien\\Dokumente\\FH\\5. Semester\\SEPJ\\SEPJ\\Backend")
+current_directory = os.path.dirname(os.path.abspath(__file__))
+db_directory = os.path.join(current_directory, "..")
+
+# Add the relative path to sys.path
+sys.path.append(db_directory)
 from cars import Car;
 
 # Function to upload data to the database
