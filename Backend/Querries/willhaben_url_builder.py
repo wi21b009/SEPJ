@@ -168,7 +168,7 @@ def build_url(base_url, search_params):
 def get_dynamic_url(id):
     # Example usage
     # Base URL, where the search is performed
-    base_url = "https://www.willhaben.at/iad/gebrauchtwagen/auto/gebrauchtwagenboerse?sfId=cab39f81-0a0c-4e5d-84b8-b19aad22a2ed&isNavigation=true"
+    base_url = "https://www.willhaben.at/iad/gebrauchtwagen/auto/gebrauchtwagenboerse?sfId=bbb4148a-57b5-4663-99de-3ab60f522b71&isNavigation=true"
 
     # Build the dynamic URL
     return build_url_from_database(base_url, id)
