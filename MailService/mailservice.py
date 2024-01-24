@@ -31,13 +31,12 @@ def send_mail():
             cursor.execute("SELECT * FROM search_parameters WHERE user_id = %s", (user_id,))
             search_parameters = cursor.fetchall()
 
-            # Fetch only new offers that have not been sent to the user
+            # Fetch only new cars that have not been sent to the user
             cursor.execute("""
-            SELECT c.*, o.offer_link FROM cars c
-            JOIN offers o ON c.id = o.car_id
-            WHERE o.user_id = %s AND NOT EXISTS (
+            SELECT c.* FROM cars c
+            WHERE c.user_id = %s AND NOT EXISTS (
                 SELECT 1 FROM sent_offers so 
-                WHERE so.offer_id = o.id AND so.user_id = %s
+                WHERE so.offer_id = c.id AND so.user_id = %s
             )
             """, (user_id, user_id))
             new_offers = cursor.fetchall()
