@@ -49,7 +49,7 @@ $(document).ready(function () {
         <td>${searchAgent.region}</td>
         <td>${searchAgent.engine}</td>
         <td>${searchAgent.features}</td>
-        <td>${searchAgent.isActive ? "aktiv" : "inaktiv"}</td>
+        <td>${searchAgent.isActive  === "t" ? "aktiv" : "inaktiv"}</td>
         <td class="text-end">
             <a class="btn btn-sm btn-secondary edit">Bearbeiten</a>
             <button type="button" class="btn btn-sm btn-secondary delete">Löschen</button>

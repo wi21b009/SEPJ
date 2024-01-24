@@ -233,7 +233,7 @@ class Datahandler
                 $row['region'],
                 $row['engine'],
                 $row['features'],
-                $row['isActive'],
+                $row['is_active'],
             );
 
             // and add it to the array

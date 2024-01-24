@@ -12,6 +12,9 @@ conn = psycopg2.connect(
 # Create a cursor object to execute SQL queries
 cursor = conn.cursor()
 
+import sys
+print(sys.path)
+
 try:
     # Example: Execute a simple query
     #cursor.execute("Delete FROM cars where id > 25")
