@@ -1,9 +1,1 @@
-# config.py gets ignored by git because of .gitignore, so you can put your own email address and password in there without worrying about it being uploaded to GitHub.
 
-# Email configuration
-sender_email = "wi21b009@technikum-wien.at"  # Change with your own email address from university
-password = "IbdTJuib21#"  # The password for your own email address
-
-# SMTP server configuration
-smtp_server = "smtp.technikum-wien.at"
-smtp_port = 587
